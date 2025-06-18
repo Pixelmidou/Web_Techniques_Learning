@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <p>Click me</p>
+    <script>
+        /*
+        Types of Events:
+        Mouse Events:
+        - click
+        - dblclick
+        - mousenter - mouseleave
+        
+        Keyboard Events: 
+        - keypress 
+        - keydown 
+        - keyup
+        
+        Form Events:
+        - submit
+        - change - focus - blur
+        
+        Document/Window Events:
+        - load
+        - resize
+        - scroll
+        - unload
+        */
+       /*
+       $(document).ready(function() {
+            // .click() : executes on a single mouse click
+            // .dblclick() : executes on a double mouse click
+            // .mouseenter() : executes when the mouse enters the element's zone
+            // .mouseleave() : executes when the mouse enters and then leaves the element's zone
+            // .mousedown() : executes when the mouse buttons are pushed / clicked on the element
+            // .mouseup() : executes as soon as the mouse buttons are let go (unclicked after being clicked)
+            $("p").mouseup(function() {
+                $(this).hide()
+            })
+       })
+       */
+      // Example : make changes to the same element , on diffrent events
+      $(document).ready(function() {
+            // .on({...}) : takes the the list of possible different events , as shown below :
+            $("p").on({
+                // .css(property,value) : takes in a css property and its value to apply on the element
+                click: function() {
+                    $(this).css("background-color", "cyan")
+                },
+                dblclick: function() {
+                    $(this).css("background-color", "red")
+                }
+            })
+      })
+    </script>
+</body>
+</html>

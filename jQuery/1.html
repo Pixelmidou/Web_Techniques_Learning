@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1 id="heading" class="heading">Heading :</h1>
+    <p>Line of text</p>
+    <p>Line of text</p>
+    <input type="button" value="Hide">
+    <!-- jQuery script can also be written externally and imported as usual : <script src="ex.js"></script> -->
+    <script>
+        // basic jQuery syntax : $(selector).action()
+        
+        // To prevent any jQuery code from executing before the page finished loading
+        // It is needed that jQuery methods be nested inside the following :
+        
+        /*
+        $(document).ready(function() {
+            // Insert jQuery method here
+        })
+        */
+
+        // Example : Hide text in all <p></p> elements on button click
+        // $(":button") : The selector of an input with type="button"
+        // .click (function() {...}) : function to be executed when the button is clicked
+        /*
+        $(document).ready(function() {
+            $(":button").click(function() {
+                $("p").hide()
+            })
+        })
+        */
+        // Example : hide a specific element with the ID Selector
+        /*
+        $(document).ready(function() {
+            $(":button").click(function() {
+                $("#heading").hide()
+            })
+        })
+        */
+        // Example : hide a specific element with the Class Selector
+        /*
+        $(document).ready(function() {
+            $(":button").click(function() {
+                $(".heading").hide()
+            })
+        })
+        */
+
+        // Other Selectors
+        
+        // $("*") : All elements
+        // $(this) : Selects the current HTML element ( in this case it would hide the button )
+        // $("p.demo") : All <p> elements with class="demo"
+        // $("ul li:first") : Selects the first <li> element of the first <ul>
+        // $("ul li:first-child") - Selects the first <li> element of every <ul>
+        // $("[href]") : Selects all elements with an href attribute
+        // $("a[target='_blank']") : Selects all  elements with a target attribute value equal to "_blank"
+        // $("a[target!='_blank']") : Selects all  elements with a target attribute value NOT equal to "_blank"
+        // $("tr:even") : Selects all even <tr> elements
+        // $("tr:odd") : Selects all odd <tr> elements
+        
+        // For other jQuery Selectors visit : https://api.jquery.com/category/selectors/
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="aff"></div>
+    <script>
+        // creating a promise
+        promise = new Promise((resolve, reject) => {
+            rand = Math.floor(Math.random() * 2)
+            if (rand === 0) {
+                resolve("promise resolved")
+            } else {
+                reject("promise rejected")
+            }
+        });
+        // handling a promise with .then/.catch
+        promise
+        .then((result) => {
+            document.getElementById("aff").innerHTML += result + " with .catch/.then <br>"
+        }).catch((err) => {
+            document.getElementById("aff").innerHTML += err + " with .catch/.then <br>"
+        });
+        // handling a promise with async/await
+        async function promise_handling() {
+            try {
+                res = await promise
+                document.getElementById("aff").innerHTML += res + " with async/await <br>"
+            } catch (error) {
+                document.getElementById("aff").innerHTML += error + " with async/await <br>"
+            }
+        }
+        promise_handling()
+    </script>
+</body>
+</html>

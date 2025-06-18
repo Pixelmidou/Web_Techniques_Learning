@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        div {
+            margin-bottom: 20px;
+        }
+    </style>
+    <div style="font-size: 25px;">JavaScript is a Single-threaded Programming Language :<br></div>
+    <div>This means that all tasks (like handling user events, rendering the UI, and executing scripts) share the same thread.<br></div>
+    <div>Long-running tasks, such as computing a large number of prime numbers, can block this single thread, making the browser unresponsive.</div>
+    <div style="font-size: 25px;">The goal of this program is to solve this issue of unresponsiveness</div>
+    <div>
+        <label for="nbp">Number of Primes to be generated :</label>
+        <input type="text" name="" id="nbp">
+        <input type="button" value="Generate" id="gen">
+    </div>
+    <h4 id="aff1"></h4>
+    <textarea name="" id="" cols="30" rows="10" placeholder="Type something here , while the primes are generating ..."></textarea>
+    <div></div>
+    <div style="font-size: 25px;">Notice how the browser dosen't get unresponsive when given a big sum of prime nums to be generated<br>Work is done in background without affecting the responsiveness of the page</div>
+    <script>
+        document.getElementById("gen").addEventListener("click", () => {
+            generatePrimes()
+            .then((primes) => {
+                document.getElementById("aff1").innerHTML = "Primes generated , check console"
+                console.log(primes)
+            })
+        })
+        function isPrime(n) {
+            if (n <= 1) {
+                return false
+            }
+            for (let i = 2; i <= Math.floor(n / 2); i++) {
+                if (n % i == 0) {
+                    return false
+                }
+            }
+            return true
+        }
+        async function generatePrimes() {
+            document.getElementById("aff1").innerHTML = "Primes are being generated , please wait ..."
+            x = document.getElementById("nbp").value
+            y = 2
+            arr = []
+            while (arr.length != x) {
+                if (isPrime(y)) {
+                    arr.push(y)
+                }
+                y++
+                // Yield control back to the browser every 1000 iterations
+                if (y % 1000 === 0) {
+                    await new Promise(resolve => setTimeout(resolve, 0))
+                }
+            }
+            return arr
+        }
+        /*
+            Generally the same strategy is used, when having a long-running synchronous task:
+            - divide the task (ex: calc prime nums) into chunks and everytime, pause the program and yield control back the browser 
+                (ex: every 1000 iteration , control is given back to the browser, after delay , the function continues excution)
+        */
+    </script>
+</body>
+</html>

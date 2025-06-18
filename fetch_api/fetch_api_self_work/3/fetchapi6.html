@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fetch</title>
+</head>
+<body>
+    <h1>List of students</h1>
+    <style>
+        div {
+            margin: 10px;
+        }
+        tr,td,th {
+            padding: 10px;
+        }
+        .x {
+            display: flex;
+            gap: 10px;
+        }
+        #resmsg {
+            text-align: center;
+            font-weight: bolder;
+            font-size: large;
+        }
+        .ti {
+            font-weight: bolder;
+            font-size: large;
+            text-decoration: underline;
+        }
+        .modsec,.delsec,.modname,.moddob,.modmark {
+            display: none;
+        }
+    </style>
+    <div id="aff"></div>
+    <div id="recs"></div>
+    <div id="butsaff"></div>
+    <div>
+        View As :
+        <input type="radio" name="t" id="list" checked>
+        <label for="list"> List</label>
+        <input type="radio" name="t" id="table">
+        <label for="table"> Table</label>
+    </div>
+    <div>
+        <label for="order">Order by : </label>
+        <select name="" id="order">
+            <option value="">Id : Ascending</option>
+            <option value="">Id : Descending</option>
+            <option value="">Name : A to Z</option>
+            <option value="">Name : Z to A</option>
+            <option value="">Date Of Birth : Ascending</option>
+            <option value="">Date Of Birth : Descending</option>
+            <option value="">Total Mark : Ascending</option>
+            <option value="">Total Mark : Descending</option>
+        </select>
+    </div>
+    <div class="x">
+        <div>
+            <fieldset>
+                <legend>Actions on Students :</legend>
+                <div>
+                    Actions : 
+                    <input type="radio" name="acc" id="adds" checked>
+                    <label for="adds">Add a Student</label>
+                    <input type="radio" name="acc" id="modi">
+                    <label for="modi">Modify a Student</label>
+                    <input type="radio" name="acc" id="del">
+                    <label for="del">Delete a Student</label>
+                </div>
+                <form class="addsec" id="addsec">
+                    <hr>
+                    <div class="ti">Add a Student : </div>
+                    <div>
+                        <label for="aname">Name : </label>
+                        <input type="text" name="" id="aname" required>
+                    </div>
+                    <div>
+                        <label for="adob">Date Of Birth : </label>
+                        <input type="date" name="" id="adob" required>
+                    </div>
+                    <div>
+                        <label for="amark">Total Mark : </label>
+                        <input type="number" name="" id="amark" step="any" min="0" max="20" required>
+                    </div>
+                    <hr>
+                    <div>
+                        <input type="reset" value="Reset">
+                        <input type="submit" value="Submit">
+                    </div>
+                </form>
+                <form class="modsec" id="modsec">
+                    <hr>
+                    <div class="ti">Modify a Student : </div>
+                    <div>
+                        Modify : 
+                        <input type="checkbox" name="" id="maccname">
+                        <label for="maccname">Name</label>
+                        <input type="checkbox" name="" id="maccdob">
+                        <label for="maccdob">Date Of Birth</label>
+                        <input type="checkbox" name="" id="maccmark">
+                        <label for="maccmark">Total Mark</label>
+                    </div>
+                    <div id="modname" class="modname">
+                        <label for="mname">Name : </label>
+                        <input type="text" name="" id="mname">
+                    </div>
+                    <div id="moddob" class="modname">
+                        <label for="mdob">Date Of Birth : </label>
+                        <input type="date" name="" id="mdob">
+                    </div>
+                    <div id="modmark" class="modname">
+                        <label for="mmark">Total Mark : </label>
+                        <input type="number" name="" id="mmark" step="any" min="0" max="20">
+                    </div>
+                    <hr>
+                    <div>
+                        <input type="reset" value="Reset">
+                        <input type="submit" value="Submit">
+                    </div>
+                </form>
+                <form class="delsec" id="delsec">
+                    <hr>
+                    <div class="ti">Delete a Student : </div>
+                    <div>
+                        <label for="id">Id : </label>
+                        <input type="text" name="" id="id" required>
+                    </div>
+                    <hr>
+                    <div>
+                        <input type="reset" value="Reset">
+                        <input type="submit" value="Submit">
+                    </div>
+                </form>
+                <div id="resmsg">
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    <script>
+        var i = 0
+        var stu = []
+        fnchoice()
+        function fnchoice() {
+            choice = document.getElementById("order").selectedIndex
+            if (choice == 0) {
+                students()
+            } else {
+                orderfilter()
+            }
+        }
+        document.getElementById("order").addEventListener("change", orderfilter)
+        document.getElementById("list").addEventListener("click", fnchoice)
+        document.getElementById("table").addEventListener("click", fnchoice)
+        document.getElementById("addsec").addEventListener("submit", addstudent)
+        function toggleElementDisplay(checkboxId, elementId) {
+            document.getElementById(checkboxId).addEventListener("change", (event) => {
+                document.getElementById(elementId).style.display = event.target.checked ? "block" : "none";
+            });
+        }
+
+        toggleElementDisplay("maccname", "modname");
+        toggleElementDisplay("maccdob", "moddob");
+        toggleElementDisplay("maccmark", "modmark");
+        function addListenerSections(id, secId) {
+            document.getElementById(id).addEventListener("click", () => {
+                document.getElementById("addsec").style.display = "none";
+                document.getElementById("modsec").style.display = "none";
+                document.getElementById("delsec").style.display = "none";
+                document.getElementById(secId).style.display = "block";
+            });
+        }
+        addListenerSections("adds", "addsec");
+        addListenerSections("modi", "modsec");
+        addListenerSections("del", "delsec");
+        async function addstudent(e) {
+            e.preventDefault()
+            name = document.getElementById("aname").value
+            dob = document.getElementById("adob").value
+            mark = document.getElementById("amark").value
+            response = await fetch("fetchapi6_3.php", {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/x-www-form-urlencoded"
+                },
+                body: `name=${name}&dob=${dob}&mark=${mark}`
+            })
+            res = await response.json()
+            if (res[0] == "1") {
+                document.getElementById("resmsg").innerHTML = "Student Added Successfully"
+            } else {
+                document.getElementById("resmsg").innerHTML = '<font color="red">Failure</font>'
+            }
+            setTimeout(() => {
+                document.getElementById("resmsg").innerHTML = ""
+            }, 3000);
+            document.getElementById("name").value = ""
+            document.getElementById("dob").value = ""
+            document.getElementById("mark").value = ""
+            students()
+        }
+        async function students() {
+            response = await fetch("fetchapi6.php", {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/x-www-form-urlencoded"
+                },
+                body: `i=${i}`
+            })
+            stu = await response.json()
+            list = document.getElementById("list").checked
+            if (list) {
+                output = ""
+                stu.slice(0,-1).forEach( (stud) => {
+                    output +=
+                    `
+                    <ul>
+                        <li> Id : ${stud[0]} </li>
+                        <li> Name : ${stud[1]} </li>
+                        <li> Date Of Birth : ${stud[2]} </li> 
+                        <li> Total Mark : ${stud[3]} </li> 
+                    </ul>
+                    `
+                })
+                document.getElementById("aff").innerHTML = output
+            } else {
+                output1 = 
+                `
+                <table border="">
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Date Of Birth</th>
+                        <th>Total Mark</th>
+                    </tr>
+                `
+                output2 = ""
+                stu.slice(0,-1).forEach( (stud) => {
+                    output2 +=
+                    `
+                    <tr>
+                        <td>${stud[0]}</td>
+                        <td>${stud[1]}</td>
+                        <td>${stud[2]}</td> 
+                        <td>${stud[3]}</td> 
+                    </tr>
+                    `
+                })
+                output3 = `</table>`
+                document.getElementById("aff").innerHTML = output1 + output2 + output3
+            }
+            buttons()
+            recsshow()
+        }
+        async function buttons() {
+            response = await fetch("fetchapi6.php", {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/x-www-form-urlencoded"
+                },
+                body: `i=${i}`
+            })
+            res = await response.json()
+            stbuts = 
+            `
+            <input type="button" value="First" onclick="first(); fnchoice();">
+            <input type="button" value="Previous" onclick="previous(); fnchoice();">
+            `
+            buts = ""
+            h = 1
+            for (y = 1; y <= res.slice(-1)[0]; y += 2) {
+                buts += `<input type='button' value='${h}' onclick='loadstudentpage(this.value)' >`
+                h++
+            }
+            enbuts = 
+            `
+            <input type="button" value="Next" onclick="next(); fnchoice();">
+            <input type="button" value="Last" onclick="last(); fnchoice();">
+            `
+            document.getElementById("butsaff").innerHTML = stbuts + buts + enbuts
+            recsshow()
+        }
+        async function loadstudentpage(val) {
+            choice = document.getElementById("order").selectedIndex
+            if (choice == 0) {
+                pval = (val - 1) * 2
+                i = pval
+                response = await fetch("fetchapi6.php", {
+                    method: "POST",
+                    headers: {
+                        "Content-type": "application/x-www-form-urlencoded"
+                    },
+                    body: `i=${pval}`
+                })
+                res = await response.json()
+                list = document.getElementById("list").checked
+                if (list) {
+                    output = ""
+                    res.slice(0,-1).forEach( (stud) => {
+                        output +=
+                        `
+                        <ul>
+                            <li> Id : ${stud[0]} </li>
+                            <li> Name : ${stud[1]} </li>
+                            <li> Date Of Birth : ${stud[2]} </li> 
+                            <li> Total Mark : ${stud[3]} </li> 
+                        </ul>
+                        `
+                    })
+                    document.getElementById("aff").innerHTML = output
+                } else {
+                    output1 = 
+                    `
+                    <table border="">
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Date Of Birth</th>
+                            <th>Total Mark</th>
+                        </tr>
+                    `
+                    output2 = ""
+                    res.slice(0,-1).forEach( (stud) => {
+                        output2 +=
+                        `
+                        <tr>
+                            <td>${stud[0]}</td>
+                            <td>${stud[1]}</td>
+                            <td>${stud[2]}</td> 
+                            <td>${stud[3]}</td> 
+                        </tr>
+                        `
+                    })
+                    output3 = `</table>`
+                    document.getElementById("aff").innerHTML = output1 + output2 + output3
+                }
+                recsshow()
+            } else {
+                pval = (val - 1) * 2
+                i = pval
+                response = await fetch("fetchapi6_2.php", {
+                    method: "POST",
+                    headers: {
+                        "Content-type": "application/x-www-form-urlencoded"
+                    },
+                    body: `i=${pval}&j=${choice}`
+                })
+                res = await response.json()
+                list = document.getElementById("list").checked
+                if (list) {
+                    output = ""
+                    res.slice(0,-1).forEach( (stud) => {
+                        output +=
+                        `
+                        <ul>
+                            <li> Id : ${stud[0]} </li>
+                            <li> Name : ${stud[1]} </li>
+                            <li> Date Of Birth : ${stud[2]} </li> 
+                            <li> Total Mark : ${stud[3]} </li> 
+                        </ul>
+                        `
+                    })
+                    document.getElementById("aff").innerHTML = output
+                } else {
+                    output1 = 
+                    `
+                    <table border="">
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Date Of Birth</th>
+                            <th>Total Mark</th>
+                        </tr>
+                    `
+                    output2 = ""
+                    res.slice(0,-1).forEach( (stud) => {
+                        output2 +=
+                        `
+                        <tr>
+                            <td>${stud[0]}</td>
+                            <td>${stud[1]}</td>
+                            <td>${stud[2]}</td> 
+                            <td>${stud[3]}</td> 
+                        </tr>
+                        `
+                    })
+                    output3 = `</table>`
+                    document.getElementById("aff").innerHTML = output1 + output2 + output3
+                }
+                recsshow()
+            }
+        }
+        function next() {
+            if (i < stu.slice(-1)[0] - 2) {
+                i += 2
+            }
+            recsshow()
+        }
+        function previous() {
+            if (i > 0) {
+                i -= 2
+            }
+            recsshow()
+        }
+        function first() {
+            if (i > 0) {
+                i = 0
+            }
+            recsshow()
+        }
+        function last() {
+            if (i < stu.slice(-1)[0] - 1) {
+                if (stu.slice(-1)[0] % 2 == 0) {
+                    i = stu.slice(-1)[0] - 2
+                } else {
+                    i = stu.slice(-1)[0] - 1
+                }
+            }
+            recsshow()
+        }
+        function recsshow() {
+            document.getElementById("recs").innerHTML = `Showing ${i / 2 + 1} out of ${Math.ceil(stu.slice(-1)[0] / 2)} pages`;
+        }
+        async function orderfilter() {
+            j = document.getElementById("order").selectedIndex
+            response = await fetch("fetchapi6_2.php", {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/x-www-form-urlencoded"
+                },
+                body: `i=${i}&j=${j}`
+            })
+            arrstu = await response.json()
+            list = document.getElementById("list").checked
+            if (list) {
+                output = ""
+                arrstu.slice(0,-1).forEach( (stud) => {
+                    output +=
+                    `
+                    <ul>
+                        <li> Id : ${stud[0]} </li>
+                        <li> Name : ${stud[1]} </li>
+                        <li> Date Of Birth : ${stud[2]} </li> 
+                        <li> Total Mark : ${stud[3]} </li> 
+                    </ul>
+                    `
+                })
+                document.getElementById("aff").innerHTML = output
+            } else {
+                output1 = 
+                `
+                <table border="">
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Date Of Birth</th>
+                        <th>Total Mark</th>
+                    </tr>
+                `
+                output2 = ""
+                arrstu.slice(0,-1).forEach( (stud) => {
+                    output2 +=
+                    `
+                    <tr>
+                        <td>${stud[0]}</td>
+                        <td>${stud[1]}</td>
+                        <td>${stud[2]}</td> 
+                        <td>${stud[3]}</td> 
+                    </tr>
+                    `
+                })
+                output3 = `</table>`
+                document.getElementById("aff").innerHTML = output1 + output2 + output3
+            }
+            buttons()
+            recsshow()
+        }
+    </script>
+</body>
+</html>

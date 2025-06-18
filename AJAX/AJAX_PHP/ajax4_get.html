@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX : PHP</title>
+</head>
+<body>
+    <h1>AJAX GET PHP</h1>
+    <form id="nameform">
+        <div>
+            <label for="name">Name : </label>
+            <input type="text" name="name" id="name">
+        </div>
+        <div id="aname"></div>
+        <div>
+            <input type="submit" value="submit" id="gname">
+        </div>
+    </form>
+    <script>
+        document.getElementById("nameform").addEventListener("submit", getname)
+        function getname(e) {
+            // e is an event argument
+            // prevents the default behaviour of redirecting to ajax4.php when submitting
+            e.preventDefault()
+            name = document.getElementById("name").value
+            xhr = new XMLHttpRequest()
+            xhr.open("GET", "ajax4.php?name=" + name, true)
+            xhr.onload = function() {
+                document.getElementById("aname").innerHTML = this.responseText
+            }
+            xhr.send()
+        }
+    </script>
+</body>
+</html>

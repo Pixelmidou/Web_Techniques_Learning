@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="txt">Hello :)</h1>
+    <input type="button" value="Get Text" id="gtext">
+    <script>
+        document.getElementById("gtext").addEventListener("click", gettext)
+        async function gettext() {
+            file_response = await fetch("sample.txt")
+            file_data = await file_response.text()
+            document.getElementById("txt").innerHTML = file_data
+        }
+    </script>
+</body>
+</html>

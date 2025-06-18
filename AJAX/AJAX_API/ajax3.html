@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX : JSON API</title>
+</head>
+<body>
+    <input type="button" value="load github users" id="gusers">
+    <h1>Github Users</h1>
+    <div id="users"></div>
+    <script>
+        document.getElementById("gusers").addEventListener("click", loadusers)
+        function loadusers() {
+            xhr = new XMLHttpRequest()
+            xhr.open("GET", "https://api.github.com/users", true)
+            xhr.onload = function() {
+                if (this.status = 200) {
+                    users = JSON.parse(this.responseText)
+                    output = ""
+                    for (i = 0; i < users.length; i++) {
+                        output += 
+                            '<div>' + 
+                            '<ul>' +
+                            '<li> Avatar : ' + '<img src="' + users[i].avatar_url + '" width="70" height="70">' + '</li>' +
+                            '<li> Id : ' + users[i].id + '</li>' +
+                            '<li> Login : ' + users[i].login + '</li>' +
+                            '</ul>' +
+                            '</div>'
+                    }
+                    document.getElementById("users").innerHTML = output
+                }
+            }
+            xhr.send()
+        }
+    </script>
+</body>
+</html>

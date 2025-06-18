@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Posts</h1>
+    <input type="button" value="Get Posts" id="gposts">
+    <div id="posts"></div>
+    <script>
+        document.getElementById("gposts").addEventListener("click", getposts)
+        async function getposts() {
+            api_response = await fetch("https://jsonplaceholder.typicode.com/posts")
+            api_data = await api_response.json()
+            output = ""
+            h = 1
+            api_data.forEach( (post) => {
+                output +=
+                `
+                <h3>Post N${h} - ${post.title}</h3>
+                <p>${post.body}</p>
+                `
+                h++
+            })
+            document.getElementById("posts").innerHTML = output
+            
+        }
+    </script>
+</body>
+</html>

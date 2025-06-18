@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Albums & Photos</h1>
+    <div id="aff">
+    </div>
+    <script>
+        // not really practical , the async/await syntax is more practical as it waits for a requests before beginning another
+        loadalbums()
+        function loadalbums() {
+            fetch("https://jsonplaceholder.typicode.com/albums")
+            .then( (response1) => response1.json() )
+            .then( (data1) => {
+                data1.forEach( (album) => {
+                    fetch("https://jsonplaceholder.typicode.com/photos?albumId=" + album.id)
+                    .then( (response2) => response2.json() )
+                    .then( (data2) => {
+                        output =
+                        `
+                        <ul>
+                            <li>Album Id : ${album.id}</li>
+                            <li>Album Title : ${album.title}</li>
+                            <li>Number of photos : ${data2.length}</li>
+                        </ul>
+                        `
+                        document.getElementById("aff").innerHTML = document.getElementById("aff").innerHTML + output
+                    } )
+                    .catch( (error2) => console.log(error2) )
+                })
+            } )
+            .catch( (error1) => console.log(error1) )
+        }
+    </script>
+</body>
+</html>

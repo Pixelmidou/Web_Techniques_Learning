@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX : PHP</title>
+</head>
+<body>
+    <h1>Get the list of subscribers with AJAX</h1>
+    <input type="button" value="Get the list" id="glist">
+    <div id="aff"></div>
+    <script>
+        document.getElementById("glist").addEventListener("click", getlist)
+        function getlist(e) {
+            e.preventDefault()
+            xhr = new XMLHttpRequest()
+            xhr.open("POST", "ajax5.php", true)
+            xhr.onload = function() {
+                subs = JSON.parse(this.responseText)
+                output = ""
+                for (i = 0; i < subs.length; i++) {
+                    output += 
+                        '<ul>' + 
+                            '<li> Id : ' + subs[i].cin + '</li>' + 
+                            '<li> Name : ' + subs[i].nom + '</li>' + 
+                            '<li> Adress : ' + subs[i].adresse + '</li>' + 
+                            '<li> Email : ' + subs[i].email + '</li>' + 
+                        '</ul>'
+                }
+                document.getElementById("aff").innerHTML = output
+            }
+            xhr.send()
+        }
+    </script>
+</body>
+</html>

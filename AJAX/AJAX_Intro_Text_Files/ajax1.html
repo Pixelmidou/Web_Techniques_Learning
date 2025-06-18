@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax Intro : text file</title>
+</head>
+<body>
+    <h1 id="t">Hello :)</h1>
+    <input type="button" value="load" id="loadbut">
+    <script>
+        document.getElementById("loadbut").addEventListener("click", loadtext)
+        function loadtext() {
+            // Create XHR Object (XmlHttpRequest)
+            xhr = new XMLHttpRequest()
+            // printing to the console : an array of the XHR Object Properties
+            // console.log(xhr)
+            
+            // OPEN - type, url/file, async(true)/sync(false)
+            xhr.open("GET", "sample.txt", true)
+
+            // gives status 1
+            // console.log("ReadyState (in diffirent parts of the code) : ", xhr.readyState)
+
+            /*
+                **** using either xhr.load or xhr.onreadystatechange ****
+                * main diffrence between load/onreadystatechange is :
+                - "onload" executes only when the request is completed (readyState = 4)
+                - "onreadystatechange" executes everytime the readyState changes (which is several times)
+            */
+
+            /*
+            // xhr.onload - Defines a callback function to be called when the request is received (loaded)
+            xhr.onload = function() {
+                // gives status 4 (onload only executed when the request is completed readyState = 4)
+                // console.log("ReadyState (in diffirent parts of the code) : ", xhr.readyState)
+                // this.status - holds the HTTP status of the XMLHttpRequest (written below in the comments)
+                if (this.status == 200) {
+                    // this.responseText - gets the text recieved by the request
+                    // console.log(this.responseText)
+                    document.getElementById("text").innerHTML = this.responseText
+                } else if (this.status == 404) {
+                    document.getElementById("text").innerHTML = "Not Found"
+                }
+            }
+            */
+           
+            /*
+            // OPTIONAL : used for loaders (progress bars, loading screens, etc...)
+            xhr.onprogress = function() {
+                // gives "status 3 : processing request" , that's when the loading thing appears
+                // console.log("ReadyState (in diffirent parts of the code) : ", xhr.readyState)
+            }
+
+            // OPTIONAL : used for error handling (when an error occurs)
+            xhr.onerror = function() {
+                // console.log("Error")
+            }
+            */
+
+            /*
+            // xhr.onreadystatechange - Defines a callback function to be called when the readyState property changes
+            // this.readyState - holds the readyState values of the XMLHttpRequest (written below in the comments)
+            xhr.onreadystatechange = function() {
+                // gives status 2 & 3 & 4 (executed multiple times till the readystate becomes 4 therefore completed)
+                // console.log("ReadyState (in diffirent parts of the code) : ", xhr.readyState)
+                if (this.readyState == 4 && this.status == 200) {
+                    // console.log(this.responseText)
+                    document.getElementById("text").innerHTML = this.responseText
+                }
+            }
+            */
+
+            // Send the request
+            xhr.send()
+        }
+        // HTTP Statuses
+        // 200 : "OK"
+        // 403 : "Forbidden"
+        // 404 : "Not Found"
+        // the rest of the HTTP Statuses : https://www.w3schools.com/tags/ref_httpmessages.asp
+
+        // readyState Values
+        // 0 : request not initialized
+        // 1 : server connection established
+        // 2 : request received
+        // 3 : processing request
+        // 4 : request finished and response is ready
+    </script>
+</body>
+</html>

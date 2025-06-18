@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c=" crossorigin="anonymous"></script>
+    <!-- Optional , Just some default styling -->
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"> 
+</head>
+<body>
+    <div id="accordion">
+        <div>Heading 1</div>
+        <div>Paragraph 1</div>
+
+        <div>Heading 2</div>
+        <div>Paragraph 2</div>
+
+        <div>Heading 3</div>
+        <div>Paragraph 3</div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $("#bar").click(function() {
+                $("#slidepanel").slideToggle(1000)
+            })
+        })
+    </script>
+</body>
+</html>

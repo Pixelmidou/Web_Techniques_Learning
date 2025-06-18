@@ -1,0 +1,21 @@
+Important Notes about the "Fetch API":
+
+* The Fetch API can be implemented using two syntaxes (all of which are async) :
+
+** "Promise-Chain" / "Promise-Based" syntax :
+- Example : 
+	fetch("sample.txt") 
+	.then(x => x.text())
+	.then(y => myDisplay(y));
+- This syntax is used mostly for parallel executions
+
+** "Async/Await" Syntax : 
+- Example :
+	async function getText(file) {
+	  let x = await fetch(file);
+	  let y = await x.text();
+	  myDisplay(y);
+	}
+- This syntax is used for sequential executions : 
+  the "await" keywords waits for the previous operation to complete before executing the current one	
+	+ Elaborating : x.text() won't get executed till the fetch(file) is completed

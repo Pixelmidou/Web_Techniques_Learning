@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="Get users" id="gusers">
+    <h1>Users :</h1>
+    <div id="users"></div>
+    <script>
+        document.getElementById("gusers").addEventListener("click", getusers)
+        async function getusers() {
+            file_response = await fetch("users.json")
+            file_data = await file_response.json()
+            output = ""
+            file_data.forEach( (user) => {
+                output +=
+                    `
+                    <ul>
+                        <li> Id : ${user.id} </li>
+                        <li> Name : ${user.name} </li>
+                        <li> Name : ${user.email} </li>
+                    </ul>
+                    `
+            });
+            document.getElementById("users").innerHTML = output
+        }
+    </script>
+</body>
+</html>

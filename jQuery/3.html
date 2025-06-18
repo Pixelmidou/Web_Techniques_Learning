@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <p>Line of text</p>
+    <input type="button" value="Hide" id="hide">
+    <input type="button" value="Show" id="show">
+    <script>
+        // hiding and showing elements
+        $(document).ready(function() {
+            $("#hide").click(function() {
+                $("p").hide("1000") // hide over the interval of 1 second (1000 milliseconds = 1 second)
+            })
+            $("#show").click(function() {
+                $("p").show("1000") // show over the interval of 1 second (1000 milliseconds = 1 second)
+            })
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1>DOM Managment</h1>
+    <hr>
+    <p id="line1"><i>Line</i> of <b>text</b></p>
+    <input type="button" value="Show Text" id="gtext">
+    <input type="button" value="Show HTML" id="ghtml">
+    <hr>
+    <input type="text" name="" id="inptext">
+    <input type="button" value="Get input Content" id="gtextinput">
+    <hr>
+    <a href="https://www.google.com/" id="anchor" title="Google">Google</a>
+    <input type="button" value="Get link" id="glink">
+    <input type="button" value="Set link And Value" id="slinkval">
+    <hr>
+    <p id="line2">Some text</p>
+    <ol>
+        <li>Baseball</li>
+        <li>Basketball</li>
+        <li>Football</li>
+    </ol>
+    <input type="button" value="Append Text" id="apptext">
+    <input type="button" value="Append List Item" id="applist">
+    <hr>
+    <img src="https://placehold.co/160x160" alt="" id="iimg">
+    <div>
+        <input type="button" value="Insert Before" id="ibefore">
+        <input type="button" value="Insert After" id="iafter">
+    </div>
+    <hr>
+    <style>
+        #box {
+            background:lightblue;
+            height:160px;
+            width:160px;
+            margin-top:5px;
+            padding: 5px;
+        }
+    </style>
+    <div id="box">
+        <p id="text1">Some text 1</p>
+        <p id="text2">Some text 2</p>
+        <p id="text3">Some text 3</p>
+    </div>
+    <input type="button" value="Remove" id="remove">
+    <input type="button" value="Empty" id="empty">
+    <input type="button" value="Filter Remove" id="fremove">
+    <hr>
+    <style>
+        .big {
+            font-weight: bold;
+            font-size: x-large;
+        }
+        .red {
+            color: red;
+        }
+    </style>
+    <h5 id="heading5">Heading</h5>
+    <p id="sometext1">some text</p>
+    <p id="sometext2">some other text</p>
+    <input type="button" value="Add Class" id="aclass">
+    <input type="button" value="Remove Class" id="rclass">
+    <input type="button" value="Toggle Class" id="tclass">
+    <hr>
+    <script>
+        // Getting/Editing Content : Text, HTML, input, attribute values, Appending to elements
+        $(document).ready(function() {
+            // .text("xxx") / .html("<b>xxx</b>") / .val("xxx") : When text added inside, can be used to set the value of an element
+            $("#gtext").click(function() {
+                alert($("#line1").text())
+            })
+            $("#ghtml").click(function() {
+                alert($("#line1").html())
+            })
+            $("#gtextinput").click(function() {
+                alert($("#inptext").val())
+            })
+            $("#glink").click(function() {
+                // Can be used for any attribute : id, class, href, target, etc ....
+                alert($("#anchor").attr("href") + " |----| " +  $("#anchor").attr("title"))
+            })
+            // Editing attributes and values of an element
+            $("#slinkval").click(function() {
+                $("#anchor").text("Youtube")
+                // $("#anchor").attr("href", "https://www.youtube.com/")
+                $("#anchor").attr({
+                    "href": "https://www.youtube.com/",
+                    "title" : "Youtube"
+                })
+            })
+            // Appending/Prepending content to an element
+            $("#apptext").click(function() {
+                $("#line2").prepend(" <b>More Text</b>")
+            })
+            $("#applist").click(function() {
+                $("ol").append(" <li>New Sport</li>")
+            })
+            // Before/After : Insert text/HTML before or after an element
+            $("#ibefore").click(function() {
+                $("#iimg").before(" <h6>Some Text Before</h6>")
+            })
+            $("#iafter").click(function() {
+                $("#iimg").after(" <h6>Some Text After</h6>")
+            })
+            // Remove : remove an element from the DOM
+            $("#remove").click(function() {
+                $("#box").remove()
+            })
+            // Empty : Empty the content of an element
+            $("#empty").click(function() {
+                $("#box").empty()
+            })
+            // Filter remove : remove certain child parts of an element from the DOM
+            $("#fremove").click(function() {
+                // remove the <p> elements with the ids #text1 and #text2
+                $("p").remove("#text1, #text2")
+            })
+            // Adding classes to an element
+            $("#aclass").click(function() {
+                $("#heading5, #sometext1").addClass("red")
+                $("#sometext2").addClass("big red")
+            })
+            // Removing a class from an element
+            $("#rclass").click(function() {
+                $("#heading5, #sometext1").removeClass("red")
+                $("#sometext2").removeClass("big red")
+            })
+            // Toggling Classes to an element
+            $("#tclass").click(function() {
+                $("#heading5, #sometext1").toggleClass("red")
+                $("#sometext2").toggleClass("big red")
+            })
+        })
+    </script>
+</body>
+</html>

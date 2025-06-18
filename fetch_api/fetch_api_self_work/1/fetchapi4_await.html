@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Albums & Photos</h1>
+    <style>
+        #loading {
+            display: none;
+            text-align: center;
+        }
+    </style>
+    <h1 id="loading">Loading the albums & photos , Please wait ...</h1>
+    <div id="aff">
+    </div>
+    <script>
+        loadalbums()
+        async function loadalbums() {
+            document.getElementById("loading").style.display = "block"
+            albums_response = await fetch("https://jsonplaceholder.typicode.com/albums")
+            albums = await albums_response.json()
+            output = ""
+            for (album of albums) {
+                photos_response = await fetch("https://jsonplaceholder.typicode.com/photos?albumId=" + album.id)
+                photos = await photos_response.json()
+                output +=
+                `
+                <ul>
+                    <li>Album Id : ${album.id}</li>
+                    <li>Album Title : ${album.title}</li>
+                    <li>Number of photos : <span onclick="photosload(${photos.length})">${photos.length}</span></li>
+                </ul>
+                `
+            }
+            document.getElementById("loading").style.display = "none"
+            document.getElementById("aff").innerHTML = output
+        }
+        function photosload(value) {
+            console.log(value)
+        }
+    </script>
+</body>
+</html>

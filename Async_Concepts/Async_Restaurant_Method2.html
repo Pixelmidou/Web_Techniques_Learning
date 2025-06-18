@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        .but {
+            padding-left: 50px;
+            padding-right: 50px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        ol {
+            font-size: larger;
+        }
+        #aff {
+            font-size: larger;
+            font-weight: bolder;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+    </style>
+    <h1>Asynchronous Restaurant :</h1>
+    <ol>
+        <li>Couscous 3alouch : 30 Seconds</li>
+        <li>Couscous Ba9ri : 20 Seconds</li>
+        <li>Couscous Djej : 10 Seconds</li>
+    </ol>
+    <div>
+        <h3>Choose a food to order :</h3>
+        <h4>P.S. : Feel free to order multiple things</h4>
+        <input type="button" value="1" class="but" id="c1">
+        <input type="button" value="2" class="but" id="c2">
+        <input type="button" value="3" class="but" id="c3">
+    </div>
+    <div id="aff"></div>
+    <script>
+        function delay(ms) {
+            // return a promise that will resolve after X milliseconds
+            return new Promise(resolve => setTimeout(resolve, ms))
+        }
+        async function prepareDish(dishName, time) {
+            document.getElementById("aff").innerHTML += `${dishName} in preparation, please wait ...<br>`
+            // Pause the execution of the program for X milliseconds
+            await delay(time)
+            document.getElementById("aff").innerHTML += `Here is your ${dishName}, thank you for choosing us<br>`
+        }
+
+        document.getElementById("c1").addEventListener("click", () => {
+            prepareDish("Couscous 3alouch", 30000)
+        });
+
+        document.getElementById("c2").addEventListener("click", () => {
+            prepareDish("Couscous Ba9ri", 20000)
+        });
+
+        document.getElementById("c3").addEventListener("click", () => {
+            prepareDish("Couscous Djej", 10000)
+        });
+    </script>
+</body>
+</html>

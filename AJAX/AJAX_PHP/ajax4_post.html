@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX : PHP</title>
+</head>
+<body>
+    <h1>AJAX POST PHP</h1>
+    <form id="nameform" method="post">
+        <div>
+            <label for="fname">First Name : </label>
+            <input type="text" name="fname" id="fname">
+        </div>
+        <div>
+            <label for="lname">Last Name : </label>
+            <input type="text" name="lname" id="lname">
+        </div>
+        <div id="aname"></div>
+        <div>
+            <input type="submit" value="submit" id="gname">
+        </div>
+    </form>
+    <script>
+        document.getElementById("nameform").addEventListener("submit", getname)
+        function getname(e) {
+            // e is an event argument
+            // e.preventDefault() - prevents the default behaviour of redirecting to ajax4.php when submitting
+            e.preventDefault()
+            fname = document.getElementById("fname").value
+            lname = document.getElementById("lname").value
+            xhr = new XMLHttpRequest()
+            xhr.open("POST", "ajax4.php", true)
+            // xhr.setRequestHeader - Adds HTTP headers to the request (prepartion for sending parameters with the POST method)
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+            xhr.onload = function() {
+                document.getElementById("aname").innerHTML = this.responseText
+            }
+            // parameters for the POST request added in xhr.send
+            xhr.send("fname=" + fname + "&lname=" + lname)
+        }
+    </script>
+</body>
+</html>
