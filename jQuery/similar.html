@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c=" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #333;
+        }
+
+        h2 {
+            font-family: 'Montserrat', 'Arial', sans-serif;
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-top: 0;
+            color: #000;
+        }
+        [class*="bar"] {
+            font-family: 'Montserrat', 'Arial', sans-serif;
+            font-size: 1.8em;
+            font-weight: 500;
+            margin: 0.5em 0;
+            cursor: pointer;
+            color: #000;
+            display: flex;
+        }
+        [class*="slide"] {
+            display: none;
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            font-size: 1.5em;
+            font-weight: 400;
+            margin: 1em 0;
+            display: none;
+            color: #555;
+        }
+        .box-shadow {
+            transition: all 80ms ease-in-out;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            background-color: #dad8d8; 
+            margin-bottom: 20px;
+        }
+        [id*="boxshadow"] {
+            padding: 15px;
+        }
+        .container {
+            display: flex;
+            align-items: flex-start;
+            margin-left: 40px;
+            margin-right: 40px;
+        }
+        .img {
+            width: 45%;
+            height: 100%;
+            flex-shrink: 0;
+            margin: 30px;
+            border-radius: 10px;
+        }
+        .accordion {
+            max-height: max-content;
+            margin: 60px;
+        }
+        .coll {
+            margin-left: auto;
+            margin-right: 10px;
+        }
+        [id*="title"] {
+            margin-left: 17px;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div id="accordion" class="accordion">
+            <h2>Say Goodbye to Chlorinated Water with Filterbaby</h2>
+            <div id="boxshadow1">
+                <div class="bar1" id="bar1">
+                    <div class="logo">
+                        <img src="//filterbaby.com/cdn/shop/files/softer-skin-with-filterbaby.svg?v=1718047945&amp;width=180">
+                    </div>
+                    <div id="title1">Achieve Better Skin With Every Wash</div>
+                    <div class="coll">
+                        <svg id="plussvg1" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z" fill="#dad8d8"></path>
+                            <path d="M12 6.375V17.625" stroke="black"></path>
+                            <path d="M6.375 12H17.625" stroke="black"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="slide1" id="slide1">Get hydrated and glowing skin by the only filter that can reduce 99.9% of Chlorine and Chloramine as well as a myriad of chemicals that are drying your skin.</div>
+            </div>
+
+            <div id="boxshadow2">
+                <div class="bar2" id="bar2">
+                    <div class="logo">
+                        <img src="//filterbaby.com/cdn/shop/files/clear-glowing-skin.svg?v=1718048014&amp;width=180">
+                    </div>
+                    <div id="title2">Get Clear, Glowing Complexion</div>
+                    <div class="coll">
+                        <svg id="plussvg2" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z" fill="#dad8d8"></path>
+                            <path d="M12 6.375V17.625" stroke="black"></path>
+                            <path d="M6.375 12H17.625" stroke="black"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="slide2" id="slide2">Micro-plastics, bacteria, fungus, rust, turbidity and hundreds of contaminants can irritate the skin. Filterbaby removes 99.9% of these contaminants as small as 0.1 microns giving you clearer, radiant skin.</div>
+            </div>
+
+            <div id="boxshadow3">
+                <div class="bar3" id="bar3">
+                    <div class="logo">
+                        <img src="//filterbaby.com/cdn/shop/files/reduce-acne.svg?v=1718048038&amp;width=180">
+                    </div>
+                    <div id="title3">Reduce Acne, Redness and Irritation</div>
+                    <div class="coll">
+                        <svg id="plussvg3" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z" fill="#dad8d8"></path>
+                            <path d="M12 6.375V17.625" stroke="black"></path>
+                            <path d="M6.375 12H17.625" stroke="black"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="slide3" id="slide3">Hard metals and contaminants in tap can clog pores and irritate skin. Filterbaby reduces harmful substances, improves acne, and calms sensitive skin. </div>
+            </div>
+
+            <div id="boxshadow4">
+                <div class="bar4" id="bar4">
+                    <div class="logo">
+                        <img src="//filterbaby.com/cdn/shop/files/healthy-skin.svg?v=1718048066&amp;width=180">
+                    </div>
+                    <div id="title4">Great for Skin Health</div>
+                    <div class="coll">
+                        <svg id="plussvg4" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z" fill="#dad8d8"></path>
+                            <path d="M12 6.375V17.625" stroke="black"></path>
+                            <path d="M6.375 12H17.625" stroke="black"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="slide4" id="slide4">Our face is the most sensitive and absorbs the most chemicals more than any part of our body. Adding Filterbaby helps strengthen skin barrier and promote long-term skin health. </div>
+            </div>
+
+            <div id="boxshadow5">
+                <div class="bar5" id="bar5">
+                    <div class="logo">
+                        <img src="//filterbaby.com/cdn/shop/files/clinically-tested.svg?v=1718048083&amp;width=180">
+                    </div>
+                    <div id="title5">Clinically Tested</div>
+                    <div class="coll">
+                        <svg id="plussvg5" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z" fill="#dad8d8"></path>
+                            <path d="M12 6.375V17.625" stroke="black"></path>
+                            <path d="M6.375 12H17.625" stroke="black"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="slide5" id="slide5">Filterbaby is clinically tested via 3rd-party clinical lab, by dermatologists, and objectively measured to improve skin hydration in just 2 weeks. </div>
+            </div>
+        </div>
+        <img class="img" id="img" src="//filterbaby.com/cdn/shop/files/clear-glowing-skin-maya.webp?v=1718030716&amp;width=874">
+    </div>
+    <script>
+        $(document).ready(function() {
+            $("#img").animate({ height: $("#accordion").outerHeight() + 180 }, 150)
+            $("#bar1").click(function() {
+                $("#slide1").slideToggle(150, function() {
+                    // $("#img").animate({ height: $("#accordion").height() }, 150)
+                    if ($("#slide1").is(":visible")) {
+                        $("#title2, #title3, #title4, #title5").css("font-weight", "normal")
+                        $("#title1").css("font-weight", "bold")
+                        $("#plussvg2 path:eq(0), #plussvg3 path:eq(0), #plussvg4 path:eq(0), #plussvg5 path:eq(0)").attr("fill", "#dad8d8").siblings("path").show()
+                        $("#plussvg1 path:eq(1)").hide()
+                        $("#plussvg1 path:eq(0)").attr("fill", "white")
+                        $("#boxshadow2, #boxshadow3, #boxshadow4, #boxshadow5").removeClass("box-shadow")
+                        $("#boxshadow1").addClass("box-shadow")
+                    } else {
+                        $("#boxshadow1").removeClass("box-shadow")
+                        $("#plussvg1 path:eq(0)").attr("fill", "#dad8d8").siblings("path").show()
+                        $("#title1").css("font-weight", "normal")
+                    }
+                })
+                $("#slide2, #slide3, #slide4, #slide5").hide(150)
+            })
+            $("#bar2").click(function() {
+                $("#slide2").slideToggle(150, function() {
+                    // $("#img").animate({ height: $("#accordion").height() }, 150)
+                    if ($("#slide2").is(":visible")) {
+                        $("#title1, #title3, #title4, #title5").css("font-weight", "normal")
+                        $("#title2").css("font-weight", "bold")
+                        $("#plussvg1 path:eq(0), #plussvg3 path:eq(0), #plussvg4 path:eq(0), #plussvg5 path:eq(0)").attr("fill", "#dad8d8").siblings("path").show()
+                        $("#plussvg2 path:eq(1)").hide()
+                        $("#plussvg2 path:eq(0)").attr("fill", "white")
+                        $("#boxshadow1, #boxshadow3, #boxshadow4, #boxshadow5").removeClass("box-shadow")
+                        $("#boxshadow2").addClass("box-shadow")
+                    } else {
+                        $("#boxshadow2").removeClass("box-shadow")
+                        $("#plussvg2 path:eq(0)").attr("fill", "#dad8d8").siblings("path").show()
+                        $("#title2").css("font-weight", "normal")
+                    }
+                })
+                $("#slide1, #slide3, #slide4, #slide5").hide(150)
+            })
+            $("#bar3").click(function() {
+                $("#slide3").slideToggle(150, function() {
+                    // $("#img").animate({ height: $("#accordion").height() }, 150)
+                    if ($("#slide3").is(":visible")) {
+                        $("#title2, #title1, #title4, #title5").css("font-weight", "normal")
+                        $("#title3").css("font-weight", "bold")
+                        $("#plussvg2 path:eq(0), #plussvg1 path:eq(0), #plussvg4 path:eq(0), #plussvg5 path:eq(0)").attr("fill", "#dad8d8").siblings("path").show()
+                        $("#plussvg3 path:eq(1)").hide()
+                        $("#plussvg3 path:eq(0)").attr("fill", "white")
+                        $("#boxshadow2, #boxshadow1, #boxshadow4, #boxshadow5").removeClass("box-shadow")
+                        $("#boxshadow3").addClass("box-shadow")
+                    } else {
+                        $("#boxshadow3").removeClass("box-shadow")
+                        $("#plussvg3 path:eq(0)").attr("fill", "#dad8d8").siblings("path").show()
+                        $("#title3").css("font-weight", "normal")
+                    }
+                })
+                $("#slide1, #slide2, #slide4, #slide5").hide(150)
+            })
+            $("#bar4").click(function() {
+                $("#slide4").slideToggle(150, function() {
+                    // $("#img").animate({ height: $("#accordion").height() }, 150)
+                    if ($("#slide4").is(":visible")) {
+                        $("#title2, #title3, #title1, #title5").css("font-weight", "normal")
+                        $("#title4").css("font-weight", "bold")
+                        $("#plussvg2 path:eq(0), #plussvg3 path:eq(0), #plussvg1 path:eq(0), #plussvg5 path:eq(0)").attr("fill", "#dad8d8").siblings("path").show()
+                        $("#plussvg4 path:eq(1)").hide()
+                        $("#plussvg4 path:eq(0)").attr("fill", "white")
+                        $("#boxshadow2, #boxshadow3, #boxshadow1, #boxshadow5").removeClass("box-shadow")
+                        $("#boxshadow4").addClass("box-shadow")
+                    } else {
+                        $("#boxshadow4").removeClass("box-shadow")
+                        $("#plussvg4 path:eq(0)").attr("fill", "#dad8d8").siblings("path").show()
+                        $("#title4").css("font-weight", "normal")
+                    }
+                })
+                $("#slide1, #slide2, #slide3, #slide5").hide(150)
+            })
+            $("#bar5").click(function() {
+                $("#slide5").slideToggle(150, function() {
+                    // $("#img").animate({ height: $("#accordion").height() }, 150)
+                    if ($("#slide5").is(":visible")) {
+                        $("#title2, #title3, #title4, #title1").css("font-weight", "normal")
+                        $("#title5").css("font-weight", "bold")
+                        $("#plussvg2 path:eq(0), #plussvg3 path:eq(0), #plussvg4 path:eq(0), #plussvg1 path:eq(0)").attr("fill", "#dad8d8").siblings("path").show()
+                        $("#plussvg5 path:eq(1)").hide()
+                        $("#plussvg5 path:eq(0)").attr("fill", "white")
+                        $("#boxshadow2, #boxshadow3, #boxshadow4, #boxshadow1").removeClass("box-shadow")
+                        $("#boxshadow5").addClass("box-shadow")
+                    } else {
+                        $("#boxshadow5").removeClass("box-shadow")
+                        $("#plussvg5 path:eq(0)").attr("fill", "#dad8d8").siblings("path").show()
+                        $("#title5").css("font-weight", "normal")
+                    }
+                })
+                $("#slide1, #slide2, #slide3, #slide4").hide(150)
+            })
+        })
+    </script>
+</body>
+</html>
